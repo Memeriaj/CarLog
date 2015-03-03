@@ -1,0 +1,14 @@
+{
+  "name": "CarLog",
+  "version": "0.0.0",
+  "description": "Web enter and viewing of various information gathered when driving different vehicals.",
+  "private": true,
+  "dependencies": {
+    "express": "4.x.x",
+    "bower": "1.x.x",
+    "gulp": "3.x.x",
+    "gulp-rename": "1.x.x",
+    "del": "0.x.x"
+  },
+  "engine": "node >= 0.10.1"
+}
