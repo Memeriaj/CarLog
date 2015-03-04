@@ -1,1 +1,18 @@
-Here are the logs
+<div>
+  <table class="table">
+    <tr>
+      <th>Time</th>
+      <th>Location</th>
+      <th>MPG</th>
+      <th>Mileage</th>
+      <th>Fillup</th>
+    </tr>
+    <tr ng-repeat="entry in fbEntries | orderBy:'time':true">
+      <td>{{getDate(entry.time)}}</td>
+      <td>{{entry.location}}</td>
+      <td>{{entry.mpg}}</td>
+      <td>{{entry.mileage}}</td>
+      <td>{{entry.fillup}}</td>
+    </tr>
+  </table>
+</div>
