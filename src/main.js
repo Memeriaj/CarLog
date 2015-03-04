@@ -26,10 +26,6 @@ angular.module('main', ['firebase', 'ngRoute'])
     };
   }])
 
-  .controller('LogsCntrl', ['$scope', 'fbTop', function($scope, fbTop){
-    $scope.data = 'Here some data';
-  }])
-
   .config(['$routeProvider', 'navOptions', function($routeProvider, navOptions){
     navOptions.forEach(function(element, index, array){
       $routeProvider.when(element.link, element.routeNav);
