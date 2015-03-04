@@ -12,6 +12,11 @@
   </head>
   <body>
     <h2>CarLog</h2>
+    <div class="collapse navbar-collapse" ng-controller="NavCntrl">
+      <ul class="nav navbar-nav">
+        <li ng-repeat="opt in options" ng-class="{ disabled: isActive(opt.link)}"><a href="{{'#'+opt.link}}">{{opt.name}}</a></li>
+      </ul>
+    </div>
     <div ng-view></div>
   </body>
 </html>
