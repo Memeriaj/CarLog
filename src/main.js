@@ -9,8 +9,17 @@ angular.module('main', ['firebase', 'ngRoute'])
   .controller('MainCntrl', ['$scope', 'fbTop', function($scope, fbTop){
     $scope.data = 'Here some data';
     $scope.fbData = fbTop;
+  }])
 
-
+  .config(['$routeProvider', function($routeProvider){
+    $routeProvider
+      .when('/entry', {
+        controller:'EntryCntrl',
+        templateUrl:'entry.html'
+      })
+      .otherwise({
+        redirectTo:'/entry'
+      });
   }])
 
   .controller('EntryCntrl', ['$scope', '$firebase', 'fbTop', function($scope, $firebase, fbTop){
