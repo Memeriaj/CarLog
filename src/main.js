@@ -14,19 +14,27 @@ angular.module('main', ['firebase', 'ngRoute'])
   }])
 
   .controller('EntryCntrl', ['$scope', '$firebase', 'fbTop', function($scope, $firebase, fbTop){
-    $scope.addLog = function(){
-      var fbEntries = $firebase(fbTop.$ref().child('entries')).$asArray();
+    var addAnEntry = function(fillupId){
+      var fbEntries = $firebase(fbTop.$inst().$ref().child('entries')).$asArray();
       $scope.subGroup.time = Date.now();
-      var addedRef = fbEntries.$add($scope.subGroup);
-      $scope.subGroup.submitted = 'Traveled to '+$scope.subGroup.loc+
-        ' ending at mile '+$scope.subGroup.mile+' at an average MPG of '+
-        $scope.subGroup.mpg+'.';
+      $scope.subGroup.fillup = fillupId;
+      fbEntries.$add($scope.subGroup);
       $scope.subGroup.location = null;
       $scope.subGroup.mpg = null;
       $scope.subGroup.mileage = null;
+      $scope.subGroup.fillup = false;
+    };
+    $scope.addLog = function(){
+      if($scope.subGroup.fillup){
+        var fbFillups = $firebase(fbTop.$inst().$ref().child('fillups')).$asArray();
+        fbFillups.$add($scope.fuelup).then(function(ref){
+          addAnEntry(ref.key());
+        });
+      } else{
+        addAnEntry(false);
+      }
     };
     $scope.subGroup = {};
     $scope.subGroup.fillup = false;
     $scope.fuelup = {};
-    $scope.subGroup.submitted = 'Nothing submitted';
   }]);
