@@ -10,7 +10,8 @@ var paths = {
   firebase: './bower_components/firebase/firebase.js',
   angularfire: './bower_components/angularfire/dist/angularfire.js',
   angularRoute: './bower_components/angular-route/angular-route.js',
-  bootstrap: './bower_components/bootstrap/dist/css/bootstrap.css'
+  bootstrap: './bower_components/bootstrap/dist/css/bootstrap.css',
+  bootstrapMap: './bower_components/bootstrap/dist/css/bootstrap.css.map'
 };
 
 gulp.task('cleanHTML', function(cb){
@@ -42,13 +43,14 @@ gulp.task('js', ['cleanJS'], function(){
 });
 
 gulp.task('css', ['cleanCSS'], function(){
-  return gulp.src([paths.bootstrap])
+  return gulp.src([paths.bootstrap, paths.bootstrapMap])
     .pipe(rename(clearFolders))
     .pipe(gulp.dest('build/css'));
 });
 
 gulp.task('watch', function(){
-  gulp.watch([paths.html, paths.js], ['html', 'js', 'css']);
+  gulp.watch(paths.js, ['js']);
+    gulp.watch(paths.html, ['html']);
 });
 
 gulp.task('default', ['watch', 'html', 'js', 'css']);
