@@ -1,3 +1,8 @@
+/* Move down from under the navbar */
+body {
+  padding-top: 70px;
+}
+
 /* Only use table-wrapper on screen >600px. */
 @media (min-width: 600px) {
   .table-wrapper {

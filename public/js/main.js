@@ -1,4 +1,4 @@
-angular.module('main', ['firebase', 'ngRoute'])
+angular.module('main', ['firebase', 'ngRoute', 'ui.bootstrap.collapse'])
 
   .value('fbURL', 'https://carlog-inferno.firebaseio.com/')
 
@@ -20,6 +20,9 @@ angular.module('main', ['firebase', 'ngRoute'])
   }])
 
   .controller('NavCtrl', ['$scope', '$location', 'navOptions', function($scope, $location, navOptions){
+     $scope.doCollapse = function() {
+       $scope.isCollapsed = true;
+    };
     $scope.options = navOptions;
     $scope.isActive = function (viewLocation) {
       return viewLocation === $location.path();
