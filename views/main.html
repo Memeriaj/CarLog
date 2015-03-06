@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CarLog</title>
+	<link rel="icon" href="favicon.ico">
+	<link rel="stylesheet" href="./css/lib/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<!-- Javascript Libraries -->
+	<script src="./js/lib/angular.js"></script>
+	<script src="./js/lib/angular-route.js"></script>
+	<script src="./js/lib/ui-bootstrap.min.js"></script>   
+	<script src="./js/lib/firebase.js"></script>
+	<script src="./js/lib/angularfire.js"></script>
+	<script src="./js/lib/moment.min.js"></script>
+	<!-- [END] Javascript Libraries -->
+	<script src="./js/main.js"></script>
+	<script src="./js/entry.js"></script>
+	<script src="./js/logs.js"></script>
+</head>
+<body ng-app="main">
+	<!-- BootStrap NavBar -->
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="NavCtrl">
+  <div class="container-fluid">
+      <div class="navbar-header">
+        <button class="btn btn-navbar navbar-toggle" type="button" ng-init="isCollapsed=true" ng-click="isCollapsed = !isCollapsed">
+          <span class="sr-only">Toggle navigation</span> 
+          <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" ng-click="doCollapse()" href="#home">CarLog</a>
+      </div>
+      <div class="navbar-collapse bs-js-navbar-collapse" collapse="isCollapsed">
+        <ul class="nav navbar-nav">
+          <li ng-repeat="opt in options" ng-class="{ active: isActive(opt.link)}" ><a ng-click="doCollapse()" href="{{'#'+opt.link}}">{{opt.name}}</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          
+        </ul>
+
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </div>
+  <!-- [END] BootStrap NavBar -->
+
+	<div class="container" ng-view></div>
+
+</body>
+</html>

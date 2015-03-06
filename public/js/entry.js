@@ -1,5 +1,5 @@
 angular.module('main')
-  .controller('EntryCntrl', ['$scope', '$firebase', 'fbTop', function($scope, $firebase, fbTop){
+  .controller('EntryCtrl', ['$scope', '$firebase', 'fbTop', function($scope, $firebase, fbTop){
     var addAnEntry = function(fillupId){
       var fbEntries = $firebase(fbTop.$inst().$ref().child('entries')).$asArray();
       $scope.subGroup.time = Date.now();
