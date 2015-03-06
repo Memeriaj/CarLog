@@ -10,8 +10,8 @@ var paths = {
   firebase: './bower_components/firebase/firebase.js',
   angularfire: './bower_components/angularfire/dist/angularfire.js',
   angularRoute: './bower_components/angular-route/angular-route.js',
-  bootstrap: './bower_components/bootstrap/dist/css/bootstrap.css',
-  bootstrapMap: './bower_components/bootstrap/dist/css/bootstrap.css.map'
+  bootstrap: './bower_components/bootstrap-css-only/css/bootstrap.min.css',
+  bootstrapMap: './bower_components/bootstrap-css-only/css/bootstrap.css.map'
 };
 
 gulp.task('cleanHTML', function(cb){
