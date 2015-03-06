@@ -6,7 +6,8 @@
   "engine": "node >= 0.10.1",
   "dependencies": {
     "express": "4.x.x",
-    "ejs": "*"
+    "ejs": "*",
+    "serve-favicon": "^2.2.0"
   }, 
   "devDependencies": {
     "bower": "1.x.x",

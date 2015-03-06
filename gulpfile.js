@@ -4,9 +4,11 @@ var rename = require('gulp-rename');
 var merge = require('merge-stream');
 
 var paths = {
+  favicon: './favicon.ico',
   html: './views/*.html',
   js: './public/js/*.js',
-  css: './public/css/*.css'
+  css: './public/css/*.css',
+  imgs: './images/([^\s]+(\.(?i)(jpg|png|gif|bmp|ico))$)',
 };
 
 var bower_paths = {
@@ -29,6 +31,10 @@ gulp.task('cleanJS', function(cb){
 
 gulp.task('cleanCSS', function(cb){
   del(['build/css'], cb);
+});
+
+gulp.task('cleanIMG', function(cb){
+  del(['build/favicon.ico','build/img'], cb);
 });
 
 var clearFolders = function(path){
@@ -67,13 +73,25 @@ gulp.task('css', ['cleanCSS'], function(){
   return merge(css_lib, css);
 });
 
+gulp.task('img', ['cleanIMG'], function(){
+  var favicon = gulp.src(paths.favicon)
+    .pipe(rename(clearFolders))
+    .pipe(gulp.dest('build'));
+
+  var imgs = gulp.src(paths.imgs)
+    .pipe(rename(clearFolders))
+    .pipe(gulp.dest('build/img'));
+
+  return merge(favicon, imgs);
+});
+
 gulp.task('watch', function(){
   gulp.watch(paths.js, ['js']);
     gulp.watch(paths.html, ['html']);
 });
 
-gulp.task('clean', ['cleanHTML', 'cleanJS', 'cleanCSS'], function(cb){
+gulp.task('clean', ['cleanHTML', 'cleanJS', 'cleanCSS', 'cleanIMG'], function(cb){
   del(['build'], cb); 
 });
-gulp.task('build', ['html', 'js', 'css']);
-gulp.task('default', ['watch', 'html', 'js', 'css']);
+gulp.task('build', ['html', 'js', 'css', 'img']);
+gulp.task('default', ['watch', 'html', 'js', 'css', 'img']);

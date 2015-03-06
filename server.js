@@ -1,10 +1,12 @@
 var express = require('express');
 var path = require('path');
+var favicon = require('serve-favicon');
 
 var routes = require('./routes/router');
 
 var app = express();
 
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(routes);
 
