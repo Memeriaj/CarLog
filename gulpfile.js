@@ -17,6 +17,7 @@ var bower_paths = {
   angularfire: './bower_components/angularfire/dist/angularfire.js',
   angularRoute: './bower_components/angular-route/angular-route.js',
   angularBootstrap: './bower_components/angular-bootstrap/ui-bootstrap.min.js',
+  momentJs: './bower_components/moment/min/moment.min.js',
   bootstrapCss: './bower_components/bootstrap-css-only/css/bootstrap.min.css',
   bootstrapCssMap: './bower_components/bootstrap-css-only/css/bootstrap.css.map' 
 };
@@ -50,7 +51,8 @@ gulp.task('html', ['cleanHTML'], function(){
 gulp.task('js', ['cleanJS'], function(){
   var js_lib = gulp.src([bower_paths.angular, bower_paths.angularRoute, 
             bower_paths.firebase, bower_paths.angularfire,
-            bower_paths.angularBootstrap])
+            bower_paths.angularBootstrap,
+            bower_paths.momentJs])
     .pipe(rename(clearFolders))
     .pipe(gulp.dest('build/js/lib'));
 
@@ -87,7 +89,8 @@ gulp.task('img', ['cleanIMG'], function(){
 
 gulp.task('watch', function(){
   gulp.watch(paths.js, ['js']);
-    gulp.watch(paths.html, ['html']);
+  gulp.watch(paths.css, ['css']);
+  gulp.watch(paths.html, ['html']);
 });
 
 gulp.task('clean', ['cleanHTML', 'cleanJS', 'cleanCSS', 'cleanIMG'], function(cb){
