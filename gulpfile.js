@@ -6,12 +6,14 @@ var paths = {
   src: './src/*',
   html: './src/**/*.html',
   js: './src/**/*.js',
+  css: './src/**/*.css',
   angular: './bower_components/angular/angular.js',
   firebase: './bower_components/firebase/firebase.js',
   angularfire: './bower_components/angularfire/dist/angularfire.js',
   angularRoute: './bower_components/angular-route/angular-route.js',
-  bootstrap: './bower_components/bootstrap-css-only/css/bootstrap.min.css',
-  bootstrapMap: './bower_components/bootstrap-css-only/css/bootstrap.css.map'
+  angularBootstrap: './bower_components/angular-bootstrap/ui-bootstrap.min.js',
+  bootstrapCss: './bower_components/bootstrap-css-only/css/bootstrap.min.css',
+  bootstrapCssMap: './bower_components/bootstrap-css-only/css/bootstrap.css.map' 
 };
 
 gulp.task('cleanHTML', function(cb){
@@ -37,13 +39,16 @@ gulp.task('html', ['cleanHTML'], function(){
 });
 
 gulp.task('js', ['cleanJS'], function(){
-  return gulp.src([paths.js, paths.angular, paths.firebase, paths.angularfire, paths.angularRoute])
+  return gulp.src([paths.js, 
+            paths.angular, paths.angularRoute,
+            paths.firebase, paths.angularfire])
     .pipe(rename(clearFolders))
     .pipe(gulp.dest('build/js'));
 });
 
 gulp.task('css', ['cleanCSS'], function(){
-  return gulp.src([paths.bootstrap, paths.bootstrapMap])
+  return gulp.src([paths.css, 
+            paths.bootstrapCss, paths.bootstrapCssMap])
     .pipe(rename(clearFolders))
     .pipe(gulp.dest('build/css'));
 });
@@ -53,4 +58,8 @@ gulp.task('watch', function(){
     gulp.watch(paths.html, ['html']);
 });
 
+gulp.task('clean', ['cleanHTML', 'cleanJS', 'cleanCSS'], function(cb){
+  del(['build'], cb); 
+});
+gulp.task('build', ['html', 'js', 'css']);
 gulp.task('default', ['watch', 'html', 'js', 'css']);
