@@ -3,10 +3,9 @@ var del = require('del');
 var rename = require('gulp-rename');
 
 var paths = {
-  src: './src/*',
-  html: './src/**/*.html',
-  js: './src/**/*.js',
-  css: './src/**/*.css',
+  html: './views/*.html',
+  js: './public/js/*.js',
+  css: './public/css/*.css',
   angular: './bower_components/angular/angular.js',
   firebase: './bower_components/firebase/firebase.js',
   angularfire: './bower_components/angularfire/dist/angularfire.js',
