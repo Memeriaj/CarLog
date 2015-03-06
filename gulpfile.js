@@ -1,11 +1,15 @@
 var gulp = require('gulp');
 var del = require('del');
 var rename = require('gulp-rename');
+var merge = require('merge-stream');
 
 var paths = {
   html: './views/*.html',
   js: './public/js/*.js',
-  css: './public/css/*.css',
+  css: './public/css/*.css'
+};
+
+var bower_paths = {
   angular: './bower_components/angular/angular.js',
   firebase: './bower_components/firebase/firebase.js',
   angularfire: './bower_components/angularfire/dist/angularfire.js',
@@ -38,18 +42,29 @@ gulp.task('html', ['cleanHTML'], function(){
 });
 
 gulp.task('js', ['cleanJS'], function(){
-  return gulp.src([paths.js, 
-            paths.angular, paths.angularRoute,
-            paths.firebase, paths.angularfire])
+  var js_lib = gulp.src([bower_paths.angular, bower_paths.angularRoute, 
+            bower_paths.firebase, bower_paths.angularfire,
+            bower_paths.angularBootstrap])
+    .pipe(rename(clearFolders))
+    .pipe(gulp.dest('build/js/lib'));
+
+  var js = gulp.src(paths.js)
     .pipe(rename(clearFolders))
     .pipe(gulp.dest('build/js'));
+
+  return merge(js_lib, js);
 });
 
 gulp.task('css', ['cleanCSS'], function(){
-  return gulp.src([paths.css, 
-            paths.bootstrapCss, paths.bootstrapCssMap])
+  var css_lib = gulp.src([bower_paths.bootstrapCss, bower_paths.bootstrapCssMap])
+    .pipe(rename(clearFolders))
+    .pipe(gulp.dest('build/css/lib'));
+
+  var css = gulp.src(paths.css)
     .pipe(rename(clearFolders))
     .pipe(gulp.dest('build/css'));
+
+  return merge(css_lib, css);
 });
 
 gulp.task('watch', function(){
