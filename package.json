@@ -1,7 +1,7 @@
 {
   "name": "CarLog",
   "version": "0.0.0",
-  "description": "Web enter and viewing of various information gathered when driving different vehicals.",
+  "description": "Web enter and viewing of various information gathered when driving different vehicles.",
   "private": true,
   "dependencies": {
     "express": "4.x.x",
